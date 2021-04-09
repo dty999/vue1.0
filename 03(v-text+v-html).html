@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+  <div id="app">
+    <p v-text="v_text">YYYYY</p>
+    <p>{{ chazhi }}XXXXXXXXX</p>
+    <p v-html="v_html">ZZZZZ</p>
+  </div>
+</body>
+<script>
+  var vm = new Vue({
+    data: {
+      v_text: "<h1>I'm v-text</h1>",
+      chazhi: '<h1>插值</h1>',
+      v_html: "<h1>v-html</h1>"
+    },
+    el: '#app'
+  })
+</script>
+
+</html>
