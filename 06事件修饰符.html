@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    .container {
+      display: inline-block;
+      width: 100%;
+      background-color: red;
+    }
+
+    .inner {
+      background-color: rosybrown;
+      height: 100px;
+      margin: 20px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div id="app">
+    <div class="container" @click.capture="clickContainer">
+      <div class="inner" @click.stop="clickInner">横幅</div>
+      <a href="www.baidu.com" @click="clickHref">百度</a>
+      <a href="www.baidu.com" @click.prevent.stop="clickHref">百度(阻止跳转)</a>
+
+    </div>
+  </div>
+</body>
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: {
+
+    },
+    methods: {
+      clickInner() {
+        console.log('clickInner');
+      },
+      clickContainer() {
+        console.log('clickContainer');
+      },
+      clickHref() {
+        console.log('连接被点击');
+      }
+    }
+  })
+</script>
+
+</html>
