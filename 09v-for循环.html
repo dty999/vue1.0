@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>myVue</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <p v-for="item in items">{{item}}</p>
+    <p v-for="(item,index) in items">{{item}}==={{index}}</p>
+    <p v-for="(key,val,index) in obj">{{val}}==={{key}}==={{index}}</p>
+    <p v-for="n in 10">{{n}}</p>
+    <!--  -->
+
+  </div>
+
+  <script>
+    //创建Vue实例,得到 ViewModel
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        items: ['2014', '1223', '11112'],
+        obj: {
+          name: 'ding',
+          age: '20'
+        },
+
+
+      },
+      methods: {}
+    });
+  </script>
+</body>
+
+</html>

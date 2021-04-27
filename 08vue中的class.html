@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>myVue</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    .red {
+      color: red;
+    }
+
+    .thin {
+      font-weight: 200;
+    }
+
+    .active {
+      letter-spacing: 0.5em;
+    }
+
+    .italic {
+      font-style: italic;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 不同vue的常规写法 -->
+    <h1 class="red thin">春江花月夜</h1>
+    <h1 :class="['red', 'thin', 'italic']">春江花月夜</h1>
+
+    <!-- 绑定数组，数组里可以是对象 也可以是三元表达式-->
+    <h1 :class="['red', 'thin', 'italic', {'active': flag}]">春江花月夜</h1>
+    <!-- 绑定对象，属性名的引号可省略 -->
+    <h1 :class="{red:true,thin:true}">春江花月夜</h1>
+    <h1 :style="{color:'green','font-style':'italic'}">床前明月光</h1>
+
+    <!-- 在style中通过数组引用多个data上的样式对象 -->
+    <h1 :style="[styleObj1,styleObj2]">床前明月光</h1>
+
+  </div>
+
+  <script>
+    //创建Vue实例,得到 ViewModel
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        flag: true,
+        classArray: ['red', 'thin', 'italic', 'active'],
+        classArray1: ['red', 'thin', 'italic', {
+          'active': true
+        }],
+        styleObj1: {
+          color: 'red',
+          'font-weight': '200',
+
+        },
+        styleObj2: {
+          'font-style': 'italic'
+        }
+      },
+      methods: {}
+    });
+  </script>
+</body>
+
+</html>

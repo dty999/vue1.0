@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>myVue</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!--  -->
+    <button @click="insertItem">插入安禄山</button>
+    <br>
+    <p v-for="item in list">
+      <input type="checkbox">
+      {{item.id}}====={{item.name}}
+    </p>
+    <hr>
+    <!-- 1.注意冒号动态绑定 -->
+    <!-- 2.number或string类型 -->
+    <p v-for="item in list" :key="item.id">
+      <input type="checkbox">
+      {{item.id}}====={{item.name}}
+    </p>
+  </div>
+
+  <script>
+    //创建Vue实例,得到 ViewModel
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        list: [{
+          id: 1,
+          name: '李白'
+        }, {
+          id: 2,
+          name: '李隆基'
+        }, {
+          id: 3,
+          name: '杨玉环'
+        }]
+      },
+      methods: {
+        insertItem() {
+          this.list.unshift({
+            id: '4',
+            name: '安禄山'
+          })
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
