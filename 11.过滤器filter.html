@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>myVue</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <p>{{name | capitalization }}</p>
+    <p>{{dateTime | formattingTime('YYYY')}}</p>
+  </div>
+
+  <script>
+    // 写在创建vue实例前面，才起作用
+    Vue.filter('capitalization', (name) => {
+      return name.toUpperCase()
+    })
+    // 写在创建vue实例前面，才起作用
+    // <!-- 可以传递多个参数 -->
+    // 第一个参数是管道符前面的内容，第二个往后依次是传递过来的参数
+
+    Vue.filter('formattingTime', (dateTime, arg) => {
+      // console.log(arg);
+      return dateTime.getFullYear() + arg
+    })
+    //创建Vue实例,得到 ViewModel
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        name: 'ding',
+        dateTime: new Date()
+      },
+      filters: {
+        filterName1(arg, arg1) {
+          return arg + arg1
+        },
+        filterName2(arg) {
+          return arg
+        },
+      },
+      methods: {}
+    });
+  </script>
+</body>
+
+</html>

@@ -8,6 +8,8 @@
   <title>Document</title>
   <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
   <link rel="stylesheet" href="./lib/bootstrap.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
   <style>
     /* .container {
       width: 1024px;
@@ -22,17 +24,35 @@
   <div class="container-fluid">
 
   </div>
-  <div class="container">
+  <div class="container" id="app">
     <!-- <img src="./lib/6.jpg" class="img-responsive" alt="Responsive image"> -->
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
       <!-- Default panel contents -->
-      <div class="panel-heading">书籍列表</div>
+      <div class="panel-heading ">
+        书籍列表
+      </div>
       <div class="panel-body">
         <p>读书使人进步</p>
+        <label for="">
+          书名：
+          <input type="text" v-model="book.bookName">
+        </label>
+
+        <label for="">
+          ID：
+          <!-- 键盘修饰符 -->
+          <!-- 也可以直接写键码值（所有的都可用） -->
+          <input type="text" v-model="book.id" @keyup.65="addBook">
+
+        </label>
+        <button class="btn btn-primary btn-sm" @click="addBook">添加</button>
+        <label for="">搜索：
+          <input type="text" v-model="searchKey">
+        </label>
       </div>
 
       <!-- Table -->
-      <table class="table">
+      <table class=" table">
         <tr>
           <td>ID</td>
           <td>书名</td>
@@ -41,10 +61,95 @@
             <div>操作</div>
           </td>
         </tr>
+        <!-- 之前，v-for中的数据，都是直接从data上的list中直接渲染过来的 -->
+        <!-- 现在，我们自定义了一个search方法，同时，把所用的关键字，通过传参的形式，传递给了search方法 -->
+        <!-- 关键字改变就会触发v-for刷新，search方法就会返回一个新的list，data中的list不会改变 -->
+        <tr v-for="item in search(searchKey)" :key="item.id">
+          <td v-text="item.id"></td>
+          <td>{{ item.bookName }}</td>
+          <td>{{ item.publicationTime }}</td>
+          <td>
+            <button class="btn btn-danger" @click="deleteBook(item.id)">删除</button>
+          </td>
+        </tr>
       </table>
     </div>
   </div>
 
 </body>
+<script>
+  var vm = new Vue({
+      el: '#app',
+      data: {
+        books: [{
+          id: '111',
+          bookName: '西游记',
+          publicationTime: '2013-12-03'
+        }, {
+          id: '222',
+          bookName: '红楼梦',
+          publicationTime: '2022-01-26'
+        }],
+        // booksBackup: [{
+        //   id: '111',
+        //   bookName: '西游记',
+        //   publicationTime: '2013-12-03'
+        // }, {
+        //   id: '222',
+        //   bookName: '红楼梦',
+        //   publicationTime: '2022-01-26'
+        // }],
+        book: {
+          id: '',
+          bookName: '',
+          publicationTime: ''
+        },
+        searchKey: ''
+
+      },
+      methods: {
+        addBook() {
+          if (this.book.id !== '') {
+            this.book.publicationTime = '2019-11-03'
+            this.books.push(this.book)
+            this.book = {
+              id: '',
+              bookName: '',
+              publicationTime: ''
+            }
+          }
+        },
+        deleteBook(id) {
+          var booksNew = this.books.filter((item) => {
+            if (item.id === id) {
+              return false
+            } else {
+              return true
+            }
+          })
+          this.books = booksNew
+
+        },
+        search(searchKey) {
+          if (searchKey === '') {
+            return this.books
+          }
+
+          var booksNew = this.books.filter((item) => {
+            if (item.bookName.indexOf(searchKey) === -1) {
+              return false
+            } else {
+              return true
+            }
+          })
+          return booksNew
+          // this.books = booksNew
+        }
+      },
+
+    }
+
+  )
+</script>
 
 </html>
